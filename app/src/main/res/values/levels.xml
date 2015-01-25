@@ -1,0 +1,165 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <integer-array name="level_1">
+        <item>9</item>
+        <item>3</item>
+        <item>3</item>
+    </integer-array>
+    <integer-array name="level_2">
+        <item>9</item>
+        <item>3</item>
+        <item>4</item>
+    </integer-array>
+    <integer-array name="level_3">
+        <item>12</item>
+        <item>4</item>
+        <item>4</item>
+    </integer-array>
+    <integer-array name="level_4">
+        <item>12</item>
+        <item>4</item>
+        <item>5</item>
+    </integer-array>
+    <integer-array name="level_5">
+        <item>12</item>
+        <item>4</item>
+        <item>6</item>
+    </integer-array>
+    <integer-array name="level_6">
+        <item>16</item>
+        <item>4</item>
+        <item>5</item>
+    </integer-array>
+    <integer-array name="level_7">
+        <item>16</item>
+        <item>4</item>
+        <item>6</item>
+    </integer-array>
+    <integer-array name="level_8">
+        <item>16</item>
+        <item>4</item>
+        <item>7</item>
+    </integer-array>
+    <integer-array name="level_9">
+        <item>20</item>
+        <item>5</item>
+        <item>6</item>
+    </integer-array>
+    <integer-array name="level_10">
+        <item>20</item>
+        <item>5</item>
+        <item>7</item>
+    </integer-array>
+    <integer-array name="level_11">
+        <item>20</item>
+        <item>5</item>
+        <item>8</item>
+    </integer-array>
+    <integer-array name="level_12">
+        <item>20</item>
+        <item>5</item>
+        <item>9</item>
+    </integer-array>
+    <integer-array name="level_13">
+        <item>25</item>
+        <item>5</item>
+        <item>7</item>
+    </integer-array>
+    <integer-array name="level_14">
+        <item>25</item>
+        <item>5</item>
+        <item>8</item>
+    </integer-array>
+    <integer-array name="level_15">
+        <item>25</item>
+        <item>5</item>
+        <item>9</item>
+    </integer-array>
+    <integer-array name="level_16">
+        <item>25</item>
+        <item>5</item>
+        <item>10</item>
+    </integer-array>
+    <integer-array name="level_17">
+        <item>25</item>
+        <item>5</item>
+        <item>11</item>
+    </integer-array>
+    <integer-array name="level_18">
+        <item>25</item>
+        <item>5</item>
+        <item>12</item>
+    </integer-array>
+    <integer-array name="level_19">
+        <item>30</item>
+        <item>6</item>
+        <item>9</item>
+    </integer-array>
+    <integer-array name="level_20">
+        <item>30</item>
+        <item>6</item>
+        <item>10</item>
+    </integer-array>
+    <integer-array name="level_21">
+        <item>30</item>
+        <item>6</item>
+        <item>11</item>
+    </integer-array>
+    <integer-array name="level_22">
+        <item>30</item>
+        <item>6</item>
+        <item>12</item>
+    </integer-array>
+    <integer-array name="level_23">
+        <item>30</item>
+        <item>6</item>
+        <item>13</item>
+    </integer-array>
+    <integer-array name="level_24">
+        <item>30</item>
+        <item>6</item>
+        <item>14</item>
+    </integer-array>
+    <integer-array name="level_25">
+        <item>36</item>
+        <item>6</item>
+        <item>10</item>
+    </integer-array>
+    <integer-array name="level_26">
+        <item>36</item>
+        <item>6</item>
+        <item>11</item>
+    </integer-array>
+    <integer-array name="level_27">
+        <item>36</item>
+        <item>6</item>
+        <item>12</item>
+    </integer-array>
+    <integer-array name="level_28">
+        <item>36</item>
+        <item>6</item>
+        <item>13</item>
+    </integer-array>
+    <integer-array name="level_29">
+        <item>36</item>
+        <item>6</item>
+        <item>14</item>
+    </integer-array>
+    <integer-array name="level_30">
+        <item>36</item>
+        <item>6</item>
+        <item>15</item>
+    </integer-array>
+    <integer-array name="level_31">
+        <item>36</item>
+        <item>6</item>
+        <item>16</item>
+    </integer-array>
+    <integer-array name="level_32">
+        <item>36</item>
+        <item>6</item>
+        <item>17</item>
+    </integer-array>
+
+</resources>
