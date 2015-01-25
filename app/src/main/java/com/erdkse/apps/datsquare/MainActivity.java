@@ -195,6 +195,7 @@ public class MainActivity extends ActionBarActivity {
             rows--;
         }
     }
+
     public class TimeCounter extends CountDownTimer {
 
         public TimeCounter(long millisInFuture, long countDownInterval) {
