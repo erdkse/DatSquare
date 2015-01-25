@@ -7,6 +7,7 @@ import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.view.Window;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
@@ -18,6 +19,7 @@ import com.google.android.gms.analytics.HitBuilders;
 import com.google.android.gms.analytics.Tracker;
 
 import java.util.ArrayList;
+import java.util.Random;
 
 
 public class MainActivity extends ActionBarActivity {
@@ -51,7 +53,7 @@ public class MainActivity extends ActionBarActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        this.requestWindowFeature(Window.FEATURE_NO_TITLE);
+        //this.requestWindowFeature(Window.FEATURE_NO_TITLE);
         //this.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setContentView(R.layout.activity_main);
 
@@ -60,7 +62,47 @@ public class MainActivity extends ActionBarActivity {
         soundIds[1] = sp.load(getApplicationContext(), R.raw.girl_screem, 1);
         soundIds[2] = sp.load(getApplicationContext(), R.raw.success_1, 1);
 
+        InitUI();
 
+        iv_btn_go.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+
+                if (onPlay == false) {
+                    setGame(stage, width);
+                    onPlay = true;
+                    startGame(imageViews);
+                    tv_left_guess.setText(getResources().getString(R.string.left) + bases[2]);
+                    //ok_to_go.setText(getResources().getString(R.string.reload));
+                    if (leftHearts > 0) {
+                        onHeart = true;
+                        iv_btn_go.setBackgroundResource(R.drawable.heart95);
+                        leftHearts--;
+                    } else {
+                        onHeart = false;
+                        iv_btn_go.setBackgroundResource(R.drawable.heart95);
+                    }
+
+                } else {
+                    onPlay = false;
+                    tv_left_guess.setText(getResources().getString(R.string.left) + " -");
+
+                    setGame(stage, width);
+                    //ok_to_go.setText(getResources().getString(R.string.start_Level) + " " + stage);
+                    if (onHeart) {
+                        timeCounter.cancel();
+                        panelCounter.cancel();
+                        iv_btn_go.setBackgroundResource(R.drawable.play);
+                    } else {
+                        iv_btn_go.setBackgroundResource(R.drawable.play);
+                    }
+
+                    setBlankImg(imageViews);
+                }
+
+            }
+        });
 
 
     }
@@ -134,6 +176,88 @@ public class MainActivity extends ActionBarActivity {
         }
     }
 
+    private void startGame(final ArrayList<ImageView> iv)
+
+    {
+        panelCounter.start();
+        timeCounter.start();
+        click_count = 0;
+        final ArrayList<Integer> randomNumbers = generateRandomNumber(0, bases[0], bases[2]);
+        showRandomImg(imageViews, randomNumbers);
+
+        final ArrayList<Integer> clicked_btns = new ArrayList<Integer>();
+
+        for (int i = 0; i < iv.size(); i++) {
+
+            final int temp_i = i;
+            iv.get(i).setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    click_count++;
+
+                    if (randomNumbers.contains(temp_i)) {
+                        iv.get(temp_i).setImageResource(R.color.green);
+                        iv.get(temp_i).setClickable(false);
+                        sp.play(soundIds[0], 1, 1, 1, 0, (float) 1.0);
+                        clicked_btns.add(temp_i);
+                        int a = bases[2] - click_count;
+                        tv_left_guess.setText(getResources().getString(R.string.left) + " " + a);
+
+                        if (click_count == 1) {
+                            panelCounter.cancel();
+                            for (int i = 0; i < iv.size(); i++) {
+                                iv.get(i).setImageResource(R.color.blue);
+                                iv.get(i).setClickable(true);
+                            }
+                            iv.get(temp_i).setImageResource(R.color.green);
+                            iv.get(temp_i).setClickable(false);
+                        }
+                        //Success Situation
+                        else if (click_count == randomNumbers.size()) {
+                            timeCounter.cancel();
+                            tv_time.setText(R.string.done);
+                            tv_time.setTextColor(getResources().getColor(R.color.green));
+
+                            stage++;
+                            if (stage > 32) {
+                                stage = 32;
+                            }
+                            //ok_to_go.setText(R.string.go_To_Next_Level);
+                            iv_btn_go.setBackgroundResource(R.drawable.up);
+
+                            sp.play(soundIds[2], 1, 1, 1, 0, (float) 1.0);
+
+                            stopGame(iv);
+                        }
+                    } else {
+                        // Fail Situation
+                        panelCounter.cancel();
+                        timeCounter.cancel();
+                        iv.get(temp_i).setImageResource(R.color.red);
+                        iv.get(temp_i).setClickable(false);
+                        sp.play(soundIds[1], 1, 1, 1, 0, (float) 1.0);
+                        tv_time.setText(R.string.ups);
+                        tv_time.setTextColor(getResources().getColor(R.color.red));
+
+                        stopGame(iv);
+                        stage = stage - 3;
+                        if (stage < 1) {
+                            stage = 1;
+                        }
+                        //ok_to_go.setText(getResources().getString(R.string.go_To_Level) + " " + stage);
+                        iv_btn_go.setBackgroundResource(R.drawable.down);
+
+                        for (int j = 0; j < randomNumbers.size(); j++) {
+                            if (!clicked_btns.contains(randomNumbers.get(j))) {
+                                iv.get(randomNumbers.get(j)).setImageResource(R.color.gray);
+                            }
+                        }
+                    }
+                }
+            });
+        }
+    }
+
     private void stopGame(final ArrayList<ImageView> iv) {
         for (int i = 0; i < iv.size(); i++) {
             iv.get(i).setClickable(false);
@@ -146,6 +270,29 @@ public class MainActivity extends ActionBarActivity {
         for (int i = 0; i < iv.size(); i++) {
             iv.get(i).setImageResource(R.color.blue);
         }
+    }
+
+    private ArrayList generateRandomNumber(int min, int max, int size) {
+        int rnd;
+        int maxi = max - 1;
+        Random rand = new Random();
+        int[] randNo = new int[size];
+        ArrayList numbers = new ArrayList();
+        for (int k = 0; k < size; k++) {
+            rnd = rand.nextInt((maxi - min) + 1) + min;
+            if (k == 0) {
+                randNo[0] = rnd;
+                numbers.add(randNo[0]);
+            } else {
+                while (numbers.contains(new Integer(rnd))) {
+                    rnd = rand.nextInt((maxi - min) + 1) + min;
+                }
+                randNo[k] = rnd;
+                numbers.add(randNo[k]);
+            }
+        }
+
+        return numbers;
     }
 
     public void Dagit(int row, int total, float screen_width, RelativeLayout parentRL) {
