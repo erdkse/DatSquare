@@ -1,12 +1,10 @@
 package com.erdkse.apps.datsquare;
 
+import android.app.Activity;
 import android.media.AudioManager;
 import android.media.SoundPool;
-import android.os.CountDownTimer;
-import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
-import android.view.Menu;
-import android.view.MenuItem;
+import android.os.CountDownTimer;
 import android.view.View;
 import android.view.Window;
 import android.widget.ImageView;
@@ -22,7 +20,7 @@ import java.util.ArrayList;
 import java.util.Random;
 
 
-public class MainActivity extends ActionBarActivity {
+public class MainActivity extends Activity {
 
     private RelativeLayout panel_rl;
     private RelativeLayout game_panel;
@@ -53,8 +51,9 @@ public class MainActivity extends ActionBarActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        //this.requestWindowFeature(Window.FEATURE_NO_TITLE);
         //this.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
+        this.requestWindowFeature(Window.FEATURE_NO_TITLE);
+
         setContentView(R.layout.activity_main);
 
         sp = new SoundPool(3, AudioManager.STREAM_MUSIC, 0);
